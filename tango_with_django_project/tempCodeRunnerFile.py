@@ -15,9 +15,8 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
-STATIC_DIR = os.path.join(BASE_DIR, "static")
-MEDIA_DIR = os.path.join(BASE_DIR, "media")
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -59,7 +58,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            TEMPLATE_DIR,
+            "'/Users/ryanmg/Library/Mobile Documents/com~apple~CloudDocs/Year 2 Uni/Semester 2/Web dev/Rango/tango_with_django_project/templates'"
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -68,7 +67,6 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "django.template.context_processors.media",
             ],
         },
     },
@@ -122,13 +120,6 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-STATICFILES_DIRS = [
-    STATIC_DIR,
-]
-
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-STATIC_URL = "/static/"
 
-# Dynamic files
-MEDIA_ROOT = MEDIA_DIR
-MEDIA_URL = "/media/"
+STATIC_URL = "/static/"
