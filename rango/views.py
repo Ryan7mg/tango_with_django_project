@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from rango.models import Category, Page
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from django.urls import reverse
+from django.contrib.auth import authenticate, login
 
 
 def index(request):
@@ -124,4 +125,25 @@ def register(request):
     # Render the template depending on the context.
     return render(request,"rango/register.html", context = {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
+def user_login(request):
 
+    if request.method == 'POST':
+        # Use request.POST.get('<variable>') instead of request.POST['<variable>'] to handle cases where the value does not exist.
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # Use Django's machinery to attempt to see if the username/password # combination is valid - a User object is returned if it is.
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                login(request, user)
+                return redirect(reverse('rango:index'))
+            else:
+                return HttpsResponse("Your Rango account is disabled.")
+        else:
+            print(f"Invalid login details: {username}, {password}")
+            return HttpResponse("Invalid login details supplied.")
+    else:
+        # No context variables to pass to the template system, hence the # blank dictionary object...
+        return render(request, 'rango/login.html')
